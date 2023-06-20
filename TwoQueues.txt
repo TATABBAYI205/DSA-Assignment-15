@@ -1,0 +1,44 @@
+package Assignment15;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+class TwoQueues 
+{
+    private Queue<Integer> q1;
+    private Queue<Integer> q2;
+    public TwoQueues() 
+    {
+        q1 = new LinkedList<>();
+        q2 = new LinkedList<>();
+    }
+    public void push(int val) 
+    {
+        q2.add(val); 
+        while (!q1.isEmpty()) 
+        {
+            q2.add(q1.remove());
+        }
+        Queue<Integer> temp = q1;
+        q1 = q2;
+        q2 = temp;
+    }
+    public int pop() {
+        if (q1.isEmpty()) 
+        {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return q1.remove();
+    }
+    public static void main(String[] args) 
+    {
+        TwoQueues stack = new TwoQueues();
+        stack.push(2);
+        stack.push(3);
+        System.out.print(stack.pop()); 
+        System.out.print(" ");
+        stack.push(4);
+        System.out.print(stack.pop());
+    }
+}
+
